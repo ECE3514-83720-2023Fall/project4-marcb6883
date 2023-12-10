@@ -8,7 +8,7 @@
 //
 
 #include "prefixTree.h"
-//#include "treeNode.h"
+#include "treeNode.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -46,9 +46,9 @@ prefixTree::~prefixTree()
 
 
 
-
+// first implemenation
 // type bool, assume to return true when adding is possible
-bool prefixTree::add(const std::string netid, const int port) {
+/*\bool prefixTree::add(const std::string netid, const int port) {
 	if (rootPtr == nullptr) { // if can't find, then add to memory
 		rootPtr = std::make_shared<treeNode>();
 	}
@@ -71,7 +71,76 @@ bool prefixTree::add(const std::string netid, const int port) {
 	current->setNetId(netid); // make the net id and port the args provided
 	current->setPort(port);
 	return true; // return that you can add
+}*/
+
+bool prefixTree::add(const std::string netid, const int port) {
+	// If the tree is empty, create a new root node
+	if (rootPtr == nullptr) {
+		rootPtr = std::make_shared<treeNode>(netid, port);
+		return true;
+	}
+
+	// Start from the root
+	std::shared_ptr<treeNode> current = rootPtr;
+
+	// Iterate over each character in the netid
+	for (size_t i = 0; i < netid.length(); ++i) {
+		char ch = netid[i];
+
+		// Check if the current node matches the netid
+		if (current->getNetId() == netid) {
+			// Node already exists, update the port and return true
+			current->setPort(port);
+			return true;
+		}
+
+		// Traverse the tree based on the character
+		if (ch == '0') {
+			// Go to the left child
+			if (current->getLeftChildPtr() == nullptr) {
+				current->setLeftChildPtr(std::make_shared<treeNode>(netid.substr(i), port));
+				return true;
+			}
+			current = current->getLeftChildPtr();
+		}
+		else if (ch == '1') {
+			// Go to the right child
+			if (current->getRightChildPtr() == nullptr) {
+				current->setRightChildPtr(std::make_shared<treeNode>(netid.substr(i), port));
+				return true;
+			}
+			current = current->getRightChildPtr();
+		}
+		else {
+			// Invalid character in netid
+			return false;
+		}
+	}
+
+	// If the loop completes without finding the node, it means we're at a leaf node
+	// Update or create the node
+	if (current->getNetId() == netid) {
+		current->setPort(port);
+	}
+	else {
+		// Create a new node as a child of the current node
+		if (netid.back() == '0') {
+			current->setLeftChildPtr(std::make_shared<treeNode>(netid, port));
+		}
+		else {
+			current->setRightChildPtr(std::make_shared<treeNode>(netid, port));
+		}
+	}
+
+	return true;
 }
+
+
+
+
+
+
+
 
 int prefixTree::findPort(std::string ipaddr) const // need to find the longest matching prefix
 {

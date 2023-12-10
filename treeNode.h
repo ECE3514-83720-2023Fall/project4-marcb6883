@@ -1,3 +1,11 @@
+////////////////////////////////////////////////////////
+// ECE 3514, Project 4, Marc-Anthony Barsoum
+//
+// File name:   treeNode.h
+// Description: Contains the class definitions with function
+//				declarations of treeNode.
+// Date:        12/9/2023
+//
 
 
 #ifndef TREE_NODE_

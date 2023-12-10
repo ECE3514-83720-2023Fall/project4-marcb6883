@@ -126,12 +126,19 @@ TEST_CASE("Test Addition of Multiple Entries to the Prefix Tree", "[Add]") {
 	str1 = "011:4\n1:3\n:0\n";
 	CHECK(str1.compare(myTree.postorderTraverse(visitNode)) == 0);
 
+	std::cout << "Expected: " << str1 << '\n'
+		<< "Got: " << myTree.postorderTraverse(visitNode) << '\n';
+
 	REQUIRE(myTree.add("0001", 5) == true);
 	CHECK(myTree.getHeight() == 3);
 	CHECK(myTree.getNumberOfNodes() == 5);
 
 	str1 = "0001:5\n011:4\n0:-1\n1:3\n:0\n";
 	CHECK(str1.compare(myTree.postorderTraverse(visitNode)) == 0);
+
+	std::cout << "Expected: " << str1 << '\n'
+		<< "Got: " << myTree.postorderTraverse(visitNode) << '\n';
+
 	str1 = "0001:5\n011:4\n1:3\n:0\n";
 	CHECK(str1.compare(myTree.postorderTraverse(visitRoutingEntry)) == 0);
 
