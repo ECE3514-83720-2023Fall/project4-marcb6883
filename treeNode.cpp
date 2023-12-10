@@ -1,4 +1,11 @@
-
+////////////////////////////////////////////////////////
+// ECE 3514, Project 4, Marc-Anthony Barsoum
+//
+// File name:   treeNode.cpp
+// Description: Contains the fucntion definitions of
+//				treeNode.
+// Date:        12/9/2023
+//
 
 #include "treeNode.h"
 

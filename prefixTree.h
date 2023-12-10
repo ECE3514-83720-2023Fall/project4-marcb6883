@@ -1,3 +1,11 @@
+////////////////////////////////////////////////////////
+// ECE 3514, Project 4, Marc-Anthony Barsoum
+//
+// File name:   prefixTree.h
+// Description: Contains the class definitions with function
+//				declarations of prefixTree.
+// Date:        12/9/2023
+//
 
 #ifndef PREFIX_TREE_
 #define PREFIX_TREE_
